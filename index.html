@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Skyline Stacker</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='10' y='4' width='12' height='24' fill='%23ffd76b'/%3E%3Crect x='13' y='8' width='2' height='3' fill='%231a2347'/%3E%3Crect x='17' y='8' width='2' height='3' fill='%231a2347'/%3E%3Crect x='13' y='14' width='2' height='3' fill='%231a2347'/%3E%3Crect x='17' y='14' width='2' height='3' fill='%231a2347'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="hud">
+    <div class="row">
+      <div class="stat"><span class="label">Cash</span><span id="cash">$50,000</span></div>
+      <div class="stat"><span class="label">Rent/s</span><span id="rent">$0</span></div>
+      <div class="stat"><span class="label">Floors</span><span id="floors">0</span></div>
+      <div class="stat"><span class="label">Tilt</span><span id="tilt">0&deg;</span></div>
+      <div class="stat"><span class="label">Target</span><span id="target">$200,000</span></div>
+      <div class="stat"><span class="label">District</span><span id="district">Suburb</span></div>
+    </div>
+    <div class="row meters">
+      <div class="meter"><span>Wind</span><div class="bar"><div id="windbar"></div></div></div>
+      <div class="meter"><span>Quake</span><div class="bar"><div id="quakebar"></div></div></div>
+    </div>
+    <div class="row">
+      <div id="next">Next: <b id="nextName">Apartments</b> <span id="nextCost">$8,000</span></div>
+      <button id="dropBtn">DROP (Space)</button>
+      <button id="skipBtn" title="Cycle to next floor type">Cycle (Tab)</button>
+      <button id="helpBtn" title="Replay tutorial">? Tutorial</button>
+    </div>
+  </div>
+
+  <canvas id="game" width="900" height="640"></canvas>
+
+  <div id="overlay" class="hidden">
+    <div class="card">
+      <h1 id="overTitle">Skyline Stacker</h1>
+      <p id="overText">Stack floors. Don't topple. Hit the cash target.</p>
+      <ul class="how" id="overHow">
+        <li><b>Space / Click</b> &mdash; drop the falling floor</li>
+        <li><b>Tab</b> &mdash; cycle to a different floor type ($500 fee)</li>
+        <li><b>&larr; &rarr;</b> &mdash; nudge falling floor while it descends</li>
+        <li>Keep tilt under 25&deg;. Wind &amp; quakes will test you.</li>
+      </ul>
+      <div class="btnrow">
+        <button id="tutorialBtn">Tutorial</button>
+        <button id="startBtn">Start Build</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tutorial" class="hidden">
+    <div class="card tut-card">
+      <div class="tut-progress"><span id="tutStep">1</span> / <span id="tutTotal">7</span></div>
+      <h2 id="tutTitle">Welcome, Developer</h2>
+      <div id="tutBody"></div>
+      <div class="btnrow">
+        <button id="tutSkip" class="ghost">Skip Tutorial</button>
+        <button id="tutPrev" class="ghost">Back</button>
+        <button id="tutNext">Next</button>
+      </div>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
